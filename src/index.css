@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-primary text-surface font-sans overflow-x-hidden;
+    background-image: radial-gradient(circle at 50% 50%, rgba(0, 225, 185, 0.1) 0%, transparent 50%);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-extrabold;
+  }
+
+  .logo-text {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-accent via-energy to-accent;
+  }
+  
+  .border-gradient {
+    border-image: linear-gradient(to right, theme('colors.accent.DEFAULT'), theme('colors.energy.DEFAULT')) 1;
+  }
+
+  .equalizer-bar {
+    @apply w-1 bg-energy mx-0.5 rounded-full;
+    animation: equalizer 1.4s ease-in-out infinite;
+    animation-delay: calc(var(--delay) * 0.2s);
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-accent hover:bg-accent-dark text-surface font-bold py-3 px-8 rounded-full transition-all
+           hover:scale-105 hover:shadow-lg hover:shadow-accent/20 relative overflow-hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-accent via-energy to-accent opacity-0 
+           hover:opacity-20 transition-opacity;
+  }
+
+  .btn-outline {
+    @apply border-2 border-surface/20 hover:border-energy text-surface hover:text-energy 
+           py-3 px-8 rounded-full transition-all hover:scale-105;
+  }
+
+  .card {
+    @apply bg-primary-light rounded-xl p-6 hover:shadow-xl hover:shadow-energy/5 
+           transition-all duration-300 border border-energy/10 hover:border-energy/20;
+  }
+
+  .nav-link {
+    @apply relative text-surface/80 hover:text-energy transition-colors;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-energy transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+}
